@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap');
+
+:root {
+    --bg-gradient: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+    --paper-color: #ffffff;
+    --text-primary: #880e4f;
+    --heart-red: #ff4081;
+    --soft-white: rgba(255, 255, 255, 0.9);
+}
+
+body {
+    background: var(--bg-gradient);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
+}
+
+/* Floating Hearts Background Animation */
+body::before {
+    content: "🌸";
+    position: absolute;
+    font-size: 2rem;
+    animation: float 6s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); }
+    100% { transform: translateY(-10vh) rotate(360deg); }
+}
+
+.paper {
+    background: var(--soft-white);
+    width: 85%;
+    max-width: 450px;
+    padding: 50px 40px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(255, 64, 129, 0.2);
+    border: 2px solid #f48fb1;
+    text-align: center;
+    position: relative;
+    min-height: 450px;
+}
+
+.content {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+    margin-bottom: 30px;
+}
+
+.cursor {
+    color: var(--heart-red);
+    font-weight: bold;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.buttons-wrapper {
+    position: relative;
+    height: 60px; /* Gives space for buttons to exist */
+    display: none; /* Shown after typing */
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+#yes-btn {
+    background: var(--heart-red);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+    z-index: 2; /* Keeps it on top */
+}
+
+#yes-btn:hover {
+    transform: scale(1.1);
+    background: #f50057;
+}
+
+#no-btn {
+    background: #fce4ec;
+    color: #ad1457;
+    position: absolute;
+    /* This starts it right on top of the Yes button area */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1; 
+}
+
+#celebration {
+    display: none;
+    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+
+.floating-heart {
+    position: fixed;
+    bottom: -50px; /* Start below the screen */
+    font-size: 1.5rem;
+    user-select: none;
+    pointer-events: none; /* So they don't block clicks on buttons */
+    z-index: 999;
+    animation: heartFloat var(--duration) linear forwards;
+}
+
+@keyframes heartFloat {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Change the wrapper to use flexbox for side-by-side layout */
+.buttons-wrapper {
+    position: relative;
+    height: 80px; 
+    display: none; 
+    justify-content: center; /* Centers both buttons */
+    align-items: center;
+    gap: 20px; /* Adds space between the buttons */
+    margin-top: 30px;
+}
+
+#no-btn {
+    background: #fce4ec;
+    color: #ad1457;
+    position: relative; /* Change from absolute to relative */
+    left: auto;
+    top: auto;
+    transform: none;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+#yes-btn {
+    background: var(--heart-red);
+    color: white;
+    position: relative;
+    z-index: 10;
+}
+
+#celebration-media {
+    width: 100%;       /* Makes it fit the width of the paper */
+    max-width: 300px;  /* Keeps it from getting too huge */
+    border-radius: 15px; /* Rounds the corners to match the aesthetic */
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#celebration {
+    display: none;
+    text-align: center;
+    padding-bottom: 20px; /* Adds space at the bottom */
+}
